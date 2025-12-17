@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Game Library - Mindful Haven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .category-header {
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* Specific Game Styles */
+        #zen-garden-canvas {
+            background: #fdf6e3;
+            border-radius: 12px;
+            cursor: crosshair;
+        }
+
+        #virtual-plant {
+            font-size: 5rem;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .pulse-light {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ffd700;
+            opacity: 0.3;
+            margin: 0 auto;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .pulse-light.glowing {
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+                box-shadow: 0 0 30px #ffd700;
+            }
+
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+        }
+
+        .falling-star {
+            animation: fall 1s ease forwards;
+            font-size: 1.2rem;
+        }
+
+        @keyframes fall {
+            to {
+                top: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body onload="initZenGarden(); initPlantCare(); initBreathingGame();">
+
+    <div style="padding: 20px; display: flex; justify-content: space-between;">
+        <a href="dashboard.html" class="btn btn-ghost">← Back Home</a>
+        <button class="btn btn-ghost" onclick="toggleChatWindow()">💬 Assistant</button>
+    </div>
+
+    <!-- Assistant Overlay -->
+    <div id="active-chat-window" class="glass-card hidden"
+        style="position: fixed; bottom: 80px; right: 20px; width: 300px; height: 300px; z-index: 200;">
+        <div id="chat-history" style="height: 250px; overflow-y: auto;"></div>
+        <input type="text" id="chat-input" placeholder="Say hi..." style="width: 100%;">
+    </div>
+
+    <div class="app-container" style="padding-top: 0;">
+        <h1 style="text-align: center; margin-bottom: 0.5rem;">Mindful Arcade</h1>
+        <p style="text-align: center; margin-bottom: 2rem;">No scores. No pressure. Just flow.</p>
+
+        <!-- CATEGORY 1: NATURE & ZEN -->
+        <h2 class="category-header">🌿 Nature & Zen <span class="badge">Restorative</span></h2>
+        <div class="game-grid">
+
+            <div class="glass-card game-card">
+                <h3>🏜️ Zen Garden Raker</h3>
+                <p>Draw patterns in the sand.</p>
+                <canvas id="zen-garden-canvas" width="300" height="200" style="width: 100%;"></canvas>
+            </div>
+
+            <div class="glass-card game-card" style="text-align: center;">
+                <h3>🌱 Virtual Plant Care</h3>
+                <p>Click to water. Watch it grow.</p>
+                <div id="virtual-plant" onclick="waterPlant()">🌱</div>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Thrives on kindness.</p>
+            </div>
+
+            <div class="glass-card game-card" style="text-align: center;">
+                <h3>🌬️ Flow Breathing Orb</h3>
+                <p>Sync your breath.</p>
+                <div id="breathing-orb"
+                    style="width: 80px; height: 80px; background: linear-gradient(135deg, #a18cd1, #fbc2eb); border-radius: 50%; margin: 1rem auto; animation: breathe 8s infinite ease-in-out;">
+                </div>
+                <p id="breathing-text">Inhale...</p>
+            </div>
+
+            <div class="glass-card game-card" onclick="updateAssistant('Imagine the smell of pine...')">
+                <h3>🌲 Forest Walk Simulator</h3>
+                <p>Audio-guided visual walk.</p>
+                <button class="btn" style="width: 100%; margin-top: 1rem;">Start Walk</button>
+            </div>
+
+            <div class="glass-card game-card" onclick="updateAssistant('Watch the clouds drift by...')">
+                <h3>☁️ Cloud Drift</h3>
+                <p>Swipe clouds away.</p>
+                <div
+                    style="height: 100px; background: linear-gradient(to bottom, #87ceeb, #e0f6ff); border-radius: 12px; position: relative;">
+                    <div style="position: absolute; top: 20px; left: 20px; font-size: 2rem;">☁️</div>
+                    <div style="position: absolute; top: 50px; right: 40px; font-size: 1.5rem;">☁️</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY 2: CREATIVE & EXPRESSION -->
+        <h2 class="category-header">🎨 Creative & Expression <span class="badge">Release</span></h2>
+        <div class="game-grid">
+
+            <div class="glass-card game-card">
+                <h3>🖍️ Color Therapy</h3>
+                <p>Click shapes to fill with calm.</p>
+                <div style="display: flex; gap: 5px; margin-bottom: 10px; justify-content: center;">
+                    <div onclick="setColorTherapy('#ffb7b2')"
+                        style="width: 20px; height: 20px; background: #ffb7b2; border-radius: 50%; cursor: pointer;">
+                    </div>
+                    <div onclick="setColorTherapy('#b2f7ef')"
+                        style="width: 20px; height: 20px; background: #b2f7ef; border-radius: 50%; cursor: pointer;">
+                    </div>
+                    <div onclick="setColorTherapy('#e0bbe4')"
+                        style="width: 20px; height: 20px; background: #e0bbe4; border-radius: 50%; cursor: pointer;">
+                    </div>
+                </div>
+                <!-- Simple SVG Mandala Mock -->
+                <svg width="100%" height="150" viewBox="0 0 100 100"
+                    style="background: rgba(255,255,255,0.5); border-radius: 12px;">
+                    <circle cx="50" cy="50" r="40" stroke="black" fill="white" onclick="paintShape(event)" />
+                    <circle cx="50" cy="50" r="20" stroke="black" fill="white" onclick="paintShape(event)" />
+                    <path d="M50 10 L60 40 L50 70 L40 40 Z" stroke="black" fill="white" onclick="paintShape(event)" />
+                </svg>
+            </div>
+
+            <div class="glass-card game-card">
+                <h3>🎭 Emotion Sketch</h3>
+                <p>Draw what you feel.</p>
+                <canvas id="play-canvas" width="600" height="300"
+                    style="width: 100%; border-radius: 12px; background: white; cursor: crosshair;"></canvas>
+                <button class="btn btn-ghost" style="margin-top: 5px; font-size: 0.8rem;"
+                    onclick="clearCanvas()">Clear</button>
+            </div>
+
+            <div class="glass-card game-card">
+                <h3>🎹 Mood Mixer</h3>
+                <p>Build your calm.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                    <button class="btn btn-ghost" onclick="playSound('Rain')">🌧️ Rain</button>
+                    <button class="btn btn-ghost" onclick="playSound('Piano')">🎹 Piano</button>
+                    <button class="btn btn-ghost" onclick="playSound('Lofi')">🎧 Lo-fi</button>
+                    <button class="btn btn-ghost" onclick="playSound('Wind')">🎐 Wind</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CATEGORY 3: FOCUS & COGNITION -->
+        <h2 class="category-header">🧠 Focus & Flow <span class="badge">Grounding</span></h2>
+        <div class="game-grid">
+
+            <div class="glass-card game-card" style="text-align: center;">
+                <h3>💡 Light Pulse Tap</h3>
+                <p>Tap only when it glows.</p>
+                <div id="pulse-light" class="pulse-light glowing" onclick="tapLight()"></div>
+            </div>
+
+            <div class="glass-card game-card">
+                <h3>🫧 Bubble Popper</h3>
+                <canvas id="bubble-canvas" width="300" height="200"
+                    style="width: 100%; border-radius: 12px; background: linear-gradient(to bottom, #e0f2fe, #fff);"></canvas>
+            </div>
+
+            <div class="glass-card game-card" onclick="updateAssistant('Find the slow match...')">
+                <h3>🧩 Soft Puzzle</h3>
+                <p>Match the gentle shapes.</p>
+                <div style="display: flex; gap: 10px; justify-content: center; font-size: 2rem;">
+                    <div>🟦</div>
+                    <div>🔵</div>
+                    <div>🟦</div>
+                </div>
+            </div>
+
+            <div class="glass-card game-card" style="text-align: center;">
+                <h3>💫 Finger Labyrinth</h3>
+                <p>Trace the path slowly.</p>
+                <svg width="100%" height="150" style="margin: 0 auto;">
+                    <path d="M10 75 Q 50 10 90 75 T 170 75" fill="none" stroke="#ddd" stroke-width="20"
+                        stroke-linecap="round" />
+                    <circle cx="10" cy="75" r="10" fill="var(--primary)" />
+                </svg>
+            </div>
+
+        </div>
+
+        <!-- CATEGORY 4: EMOTIONAL SUPPORT -->
+        <h2 class="category-header">❤️ Emotional Support <span class="badge">Connection</span></h2>
+        <div class="game-grid">
+
+            <div class="glass-card game-card" style="position: relative;">
+                <h3>🏺 Gratitude Jar</h3>
+                <p>Drop one good thought.</p>
+                <div id="gratitude-jar-visual"
+                    style="height: 100px; border: 2px solid rgba(0,0,0,0.2); border-top: none; border-radius: 0 0 20px 20px; position: relative; overflow: hidden; margin-bottom: 10px;">
+                </div>
+                <input type="text" id="gratitude-input" placeholder="I am grateful for..."
+                    style="margin-bottom: 0.5rem;">
+                <button class="btn" style="width: 100%;" onclick="addGratitude()">Drop it in</button>
+            </div>
+
+            <div class="glass-card game-card" onclick="window.location.href='chat.html'">
+                <h3>🤖 AI Friendly Companion</h3>
+                <p>Talk to someone who listens.</p>
+                <div style="font-size: 3rem; text-align: center;">🌿</div>
+                <button class="btn btn-ghost" style="width: 100%;">Open Chat</button>
+            </div>
+
+            <div class="glass-card game-card" style="text-align: center;">
+                <h3>⚡ 60-Second Reset</h3>
+                <p>Breathe. Affirm. Stretch.</p>
+                <button class="btn" onclick="startTimer(1)">Start 1 Min</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <style>
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.4);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</body>
+
+</html>

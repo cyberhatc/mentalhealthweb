@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chat - Mindful Haven</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .settings-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        .settings-btn:hover {
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding: 20px;">
+        <a href="dashboard.html" class="btn btn-ghost">← Back Home</a>
+        <button class="settings-btn" onclick="toggleSettings()">⚙️</button>
+    </div>
+
+    <!-- API Key Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="glass-card" style="width: 300px; padding: 2rem;">
+            <h3>⚙️ AI Settings</h3>
+            <p style="font-size: 0.9rem;">To enable real AI, please enter your API Key (e.g., Gemini / OpenAI).</p>
+            <input type="password" id="api-key-input" placeholder="Paste API Key here..."
+                style="width: 100%; margin-bottom: 1rem;">
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="saveApiKey()">Save</button>
+                <button class="btn btn-ghost" onclick="toggleSettings()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div class="glass-card" style="height: 80vh; display: flex; flex-direction: column;">
+            <div
+                style="display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1rem; margin-bottom: 1rem;">
+                <div style="font-size: 2rem;">🌿</div>
+                <div>
+                    <h2>Friend Assistant</h2>
+                    <p style="margin: 0;" id="assistant-text">I'm listening.</p>
+                </div>
+            </div>
+
+            <div id="chat-history"
+                style="flex: 1; overflow-y: auto; padding: 1rem; background: rgba(255,255,255,0.3); border-radius: 12px; display: flex; flex-direction: column; gap: 10px;">
+                <div
+                    style="align-self: flex-start; background: rgba(255,255,255,0.5); padding: 10px; border-radius: 10px;">
+                    Hello. I am here to listen. How are you feeling today?
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <input type="text" id="chat-input" placeholder="Type a message..." style="margin-bottom: 0;">
+                <button class="btn"
+                    onclick="handleChatInput({target: document.getElementById('chat-input'), key: 'Enter'})">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Settings Logic (Local to page specific UI)
+        function toggleSettings() {
+            const m = document.getElementById('settings-modal');
+            m.classList.toggle('active');
+            if (m.classList.contains('active')) {
+                document.getElementById('api-key-input').value = localStorage.getItem('mh_api_key') || '';
+            }
+        }
+        function saveApiKey() {
+            const k = document.getElementById('api-key-input').value;
+            if (k) {
+                localStorage.setItem('mh_api_key', k);
+                toggleSettings();
+                alert("API Key Saved!");
+            }
+        }
+    </script>
+</body>
+
+</html>

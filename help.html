@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Help - Mindful Haven</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #111827, #374151) !important;
+            color: white;
+        }
+
+        .app-container {
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container" style="text-align: center;">
+        <div class="glass-card" style="background: rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.1);">
+            <h1 style="color: #f87171;">Crisis Support</h1>
+            <p style="font-size: 1.2rem;">You are not alone.</p>
+
+            <div style="margin: 2rem 0; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 20px;">
+                <h2>Grounding Technique (5-4-3-2-1)</h2>
+                <div id="grounding-step" style="font-size: 1.5rem; margin: 2rem 0; min-height: 50px;">
+                    Click start to begin.
+                </div>
+                <button class="btn" onclick="startGrounding()" style="background: #3b82f6;">Start / Reset</button>
+                <button class="btn" onclick="nextGroundingStep()"
+                    style="border: 1px solid white; background: transparent;">Next Step</button>
+            </div>
+
+            <p id="assistant-text">I'm right here with you.</p>
+
+            <div style="margin-top: 3rem;">
+                <p>Emergency Resources:</p>
+                <a href="#" style="color: #93c5fd; display: block;">National Suicide Prevention Lifeline</a>
+                <a href="#" style="color: #93c5fd; display: block; margin-top: 10px;">Crisis Text Line</a>
+            </div>
+
+            <a href="dashboard.html" class="btn btn-ghost"
+                style="margin-top: 2rem; color: white; border-color: white;">I feel better now</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

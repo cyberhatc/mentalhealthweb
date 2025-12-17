@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stress Tracker - Mindful Haven</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div style="padding: 20px;">
+        <a href="dashboard.html" class="btn btn-ghost">← Back Home</a>
+    </div>
+
+    <div class="app-container" style="text-align: center;">
+        <div class="glass-card">
+            <h1>Stress Tracker</h1>
+            <p>Tracking your journey to calm.</p>
+
+            <div style="margin: 3rem 0;">
+                <h2>Current Level</h2>
+                <div style="font-size: 6rem; font-weight: bold; color: var(--primary);" id="current-stress">?</div>
+            </div>
+
+            <h3>Update Status</h3>
+            <div class="stress-scale" style="justify-content: center; margin-top: 1rem;">
+                <button class="scale-btn" onclick="selectStress(1)">1</button>
+                <button class="scale-btn" onclick="selectStress(3)">3</button>
+                <button class="scale-btn" onclick="selectStress(5)">5</button>
+                <button class="scale-btn" onclick="selectStress(7)">7</button>
+                <button class="scale-btn" onclick="selectStress(9)">9</button>
+            </div>
+
+            <p id="assistant-text" style="margin-top: 2rem;">Consistent checks help us learn.</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const level = AppState.user.stressLevel || '?';
+            document.getElementById('current-stress').textContent = level;
+        });
+    </script>
+</body>
+
+</html>

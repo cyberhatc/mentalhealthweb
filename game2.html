@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Click to Release Stress</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: radial-gradient(circle, #111, #000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        h1 {
+            position: absolute;
+            top: 20px;
+            font-size: 22px;
+            opacity: 0.85;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 100px);
+            gap: 20px;
+        }
+
+        .item {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff5f6d, #ffc371);
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            cursor: pointer;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            user-select: none;
+        }
+
+        /* Shake animation before breaking */
+        .shake {
+            animation: shake 0.4s;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            50% {
+                transform: translateX(6px);
+            }
+
+            75% {
+                transform: translateX(-6px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Destroyed state */
+        .destroyed {
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 15px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Click on an object to release stress 🧘‍♀️</h1>
+
+    <div class="container">
+        <!-- 10 Stress Objects -->
+        <div class="item">💢</div>
+        <div class="item">🧱</div>
+        <div class="item">🪨</div>
+        <div class="item">📦</div>
+        <div class="item">🔥</div>
+        <div class="item">💣</div>
+        <div class="item">⚡</div>
+        <div class="item">🔨</div>
+        <div class="item">🪵</div>
+        <div class="item">🗑️</div>
+    </div>
+
+    <footer>Tap → breathe out → let it go 🌬️</footer>
+
+    <script>
+        const items = document.querySelectorAll(".item");
+        let destroyedCount = 0;
+
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                if (item.classList.contains("destroyed")) return;
+
+                // Shake first
+                item.classList.add("shake");
+
+                setTimeout(() => {
+                    item.classList.remove("shake");
+                    item.classList.add("destroyed");
+                    destroyedCount++;
+
+                    // If all items destroyed → reset
+                    if (destroyedCount === items.length) {
+                        setTimeout(resetAll, 1200);
+                    }
+                }, 400);
+            });
+        });
+
+        function resetAll() {
+            items.forEach(item => {
+                item.classList.remove("destroyed");
+            });
+            destroyedCount = 0;
+        }
+    </script>
+
+</body>
+
+</html>

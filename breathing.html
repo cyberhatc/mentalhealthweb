@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Space - Mindful Haven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #2d3748;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .breathing-center {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        #breathing-circle {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 50%;
+            margin: 2rem auto;
+            animation: breathe 8s infinite ease-in-out;
+            box-shadow: 0 0 30px rgba(168, 237, 234, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.5);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Assistant -->
+    <div style="position: fixed; top: 20px; right: 20px; display: flex; align-items: center; gap: 10px; z-index: 100;">
+        <div class="glass-card" style="padding: 0.5rem 1rem; border-radius: 20px;">
+            <p id="assistant-text" style="margin: 0;">Take a deep breath.</p>
+        </div>
+        <div style="font-size: 3rem;">🌿</div>
+    </div>
+
+    <div class="app-container">
+        <header style="text-align: center; padding-top: 2rem; padding-bottom: 2rem;">
+            <h1>Breathing Space</h1>
+            <p>Connect to all parts of your journey</p>
+        </header>
+
+        <!-- Breathing Visual -->
+        <div class="breathing-center">
+            <div id="breathing-circle" onclick="toggleBreathing()">
+                <span id="breathing-status" style="color: white; font-weight: 600;">Tap to Pause</span>
+            </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <h2 style="text-align: center; margin-top: 2rem;">Explore</h2>
+        <div class="nav-grid">
+            <a href="dashboard.html" class="nav-card">
+                <h3>🏠 Dashboard</h3>
+            </a>
+            <a href="chat.html" class="nav-card">
+                <h3>💬 Chat Friend</h3>
+            </a>
+            <a href="games.html" class="nav-card">
+                <h3>🎮 Games</h3>
+            </a>
+            <a href="jarnalling.html" class="nav-card">
+                <h3>📓 Journal</h3>
+            </a>
+            <a href="music.html" class="nav-card">
+                <h3>🎵 Music</h3>
+            </a>
+            <a href="stresstracker.html" class="nav-card">
+                <h3>📊 Stress Tracker</h3>
+            </a>
+            <a href="game2.html" class="nav-card">
+                <h3>🧩 More Games</h3>
+            </a>
+            <a href="temp_music.html" class="nav-card">
+                <h3>🎧 Cool Music</h3>
+            </a>
+            <a href="help.html" class="nav-card" style="border-color: #feb2b2;">
+                <h3 style="color: #c53030;">🆘 Help</h3>
+            </a>
+            <a href="index.html" class="nav-card">
+                <h3>👋 Intro</h3>
+            </a>
+            <a href="login.html" class="nav-card">
+                <h3>🔑 Login</h3>
+            </a>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

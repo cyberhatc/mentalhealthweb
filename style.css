@@ -1,0 +1,286 @@
+/* 
+   🌿 Mindful Haven - Premium Stress Relief
+   Design System & Core Styles
+*/
+
+:root {
+    /* Core Colors */
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --accent: #f093fb;
+    --success: #4ade80;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --white: #ffffff;
+
+    /* Neomorphism & Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+
+    /* Default Background */
+    --bg-gradient: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+
+    /* Font */
+    --font-main: 'Outfit', 'Segoe UI', sans-serif;
+}
+
+/* Profession Themes */
+body.theme-student {
+    --bg-gradient: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    --primary: #4FACFE;
+    --secondary: #00f2fe;
+}
+
+body.theme-teacher {
+    --bg-gradient: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    --primary: #ff9a9e;
+    --secondary: #fecfef;
+}
+
+/* Medical: Dark, Minimal, Trauma-Safe */
+body.theme-medical {
+    --bg-gradient: linear-gradient(to bottom, #0f172a 0%, #1e293b 100%);
+    --primary: #3b82f6;
+    --secondary: #60a5fa;
+    --text: #f8fafc;
+    --text-light: #94a3b8;
+    --glass-bg: rgba(15, 23, 42, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+/* Crisis Mode: Emergency Overlay */
+body.mode-crisis {
+    --bg-gradient: linear-gradient(to bottom, #000000 0%, #450a0a 100%);
+    --text: #f0fdf4;
+    --glass-bg: rgba(0, 0, 0, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    color: var(--text);
+    overflow-x: hidden;
+    transition: background 1s ease;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Container */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Glass Card */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--glass-shadow);
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+/* Inputs */
+input,
+select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    background: white;
+    border-color: var(--primary);
+}
+
+/* 
+    STEP 1: Entry "Friend Assistant" 
+*/
+.assistant-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: white;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* 
+    STEP 4: Stress Scale 
+*/
+.stress-scale {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    position: relative;
+    padding: 0 10px;
+}
+
+.scale-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.scale-btn:hover,
+.scale-btn.active {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.2);
+}
+
+/* 
+    Dashboard Grid 
+*/
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    min-height: 80vh;
+}
+
+.sidebar {
+    height: 100%;
+}
+
+.main-content {
+    overflow-y: auto;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Features */
+.breathing-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    margin: 2rem auto;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+        /* Mobile menu to be implemented */
+    }
+}

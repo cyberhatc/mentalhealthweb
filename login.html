@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mindful Haven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Assistant Avatar -->
+    <div style="position: fixed; top: 20px; right: 20px; text-align: right;">
+        <div class="glass-card"
+            style="padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 5px;">
+            <p id="assistant-text" style="margin: 0;">Hi, I'm here regarding your mental health.</p>
+        </div>
+        <div id="assistant-avatar" style="font-size: 3rem;">🌿</div>
+    </div>
+
+    <div class="app-container" style="justify-content: center; align-items: center;">
+
+        <!-- STEP 1: Entry -->
+        <section id="view-entry" class="fade-in" style="text-align: center;">
+            <h1>Mindful Haven</h1>
+            <p>Your space to breathe.</p>
+            <button class="btn" onclick="startJourney()">Begin</button>
+        </section>
+
+        <!-- STEP 2: Onboarding -->
+        <section id="view-onboarding" class="hidden glass-card" style="width: 100%; max-width: 400px;">
+            <h2>About You</h2>
+            <form onsubmit="submitOnboarding(event)">
+                <input type="text" name="name" required placeholder="Name">
+                <input type="number" name="age" required placeholder="Age">
+                <select name="profession" required>
+                    <option value="" disabled selected>Profession</option>
+                    <option value="Student">Student</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button type="submit" class="btn" style="width: 100%;">Continue</button>
+            </form>
+        </section>
+
+        <!-- STEP 3: Welcome -->
+        <section id="view-welcome" class="hidden glass-card" style="text-align: center;">
+            <h2>How was your day?</h2>
+            <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                <button class="btn btn-ghost" onclick="handleWelcomeResponse('good')">Good</button>
+                <button class="btn btn-ghost" onclick="handleWelcomeResponse('stress')">Stressful</button>
+            </div>
+        </section>
+
+        <!-- STEP 4: Stress -->
+        <section id="view-stress" class="hidden glass-card" style="text-align: center;">
+            <h2>Stress Level (1-10)</h2>
+            <div class="stress-scale" style="flex-wrap: wrap; justify-content: center; gap: 5px;">
+                <button class="scale-btn" onclick="selectStress(1)">1</button>
+                <button class="scale-btn" onclick="selectStress(2)">2</button>
+                <button class="scale-btn" onclick="selectStress(3)">3</button>
+                <button class="scale-btn" onclick="selectStress(4)">4</button>
+                <button class="scale-btn" onclick="selectStress(5)">5</button>
+                <button class="scale-btn" onclick="selectStress(6)">6</button>
+                <button class="scale-btn" onclick="selectStress(7)">7</button>
+                <button class="scale-btn" onclick="selectStress(8)">8</button>
+                <button class="scale-btn" onclick="selectStress(9)">9</button>
+                <button class="scale-btn" onclick="selectStress(10)">10</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
